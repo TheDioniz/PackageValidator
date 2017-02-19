@@ -1,0 +1,8 @@
+grant SignedBy "terry" {
+  permission
+    com.scoredev.scores.HighScorePermission
+      "ExampleGame", signedBy "chris";
+};
+
+  permission java.util.PropertyPermission
+    "user.home", "read";
