@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -20,13 +21,20 @@ public class EarValidator {
 	public static void main(String[] args) {
 
 		double start = System.currentTimeMillis();
+		
+		String[] appNameTab = INPUT_ZIP_FILE.split(Pattern.quote("\\"));
+		System.out.println(retrieveApplicationName(appNameTab));
 
-		unzipIt(INPUT_ZIP_FILE, OUTPUT_DIR, true);
+		//unzipIt(INPUT_ZIP_FILE, OUTPUT_DIR, true);
 
 		double end = System.currentTimeMillis();
 
 		System.out.println("Time taken: " + ((end - start) / 60) + " seconds.");
 
+	}
+	
+	private static String retrieveApplicationName(String[] splittedZipPath) {
+		return splittedZipPath[splittedZipPath.length - 1].substring(0, splittedZipPath[splittedZipPath.length - 1].length() - 4);
 	}
 
 	private static void unzipIt(final String inputZip, final String outputDir, boolean recursively) {
